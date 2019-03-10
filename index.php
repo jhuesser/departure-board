@@ -8,6 +8,7 @@ if(isset($_GET['station'])){
 $station_board = json_decode(file_get_contents($config->api_root . "stationboard?station=" . $station), true);
 
 foreach($station_board['stationboard'] as $departure){
-	echo date_format($departure['departureTimestamp'], 'H:i') . " " . $departure['category'] . " " . $departure['number'] . " " . $departure['to'] . " " . $departure['plattform'] . "<br>";
+	$departureTimestamp = new DateTime($departure['departureTimestamp']);
+	echo $departureTimestamp->format('H:i') . " " . $departure['category'] . " " . $departure['number'] . " " . $departure['to'] . " " . $departure['plattform'] . "<br>";
 }
 
